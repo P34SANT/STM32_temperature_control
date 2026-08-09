@@ -63,7 +63,6 @@
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
-void Change_State(State_t new_state) ;
 
 /* USER CODE END PFP */
 
@@ -185,9 +184,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void Change_State(State_t new_state) {
-  state = new_state;
-}
+
 
 /* USER CODE END 4 */
 

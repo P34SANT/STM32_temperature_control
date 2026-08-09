@@ -71,7 +71,7 @@ void Error_Handler(void);
 #define FAN_A_GPIO_Port GPIOA
 #define FAN_B_Pin GPIO_PIN_2
 #define FAN_B_GPIO_Port GPIOA
-#define NTC_Pin GPIO_PIN_4
+#define NTC_Pin GPIO_PIN_5
 #define NTC_GPIO_Port GPIOA
 #define RGB_RED_Pin GPIO_PIN_11
 #define RGB_RED_GPIO_Port GPIOE
