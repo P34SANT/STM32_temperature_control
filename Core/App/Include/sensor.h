@@ -10,7 +10,7 @@ void Sensor_Init();
 
 void Sensor_update() ;
 
-extern volatile uint32_t temp_sensor_value ;
+extern volatile double temp_sensor_value ;
 
 void StartSensorTask(void *argument);
 
