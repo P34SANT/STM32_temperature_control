@@ -73,6 +73,12 @@ void Error_Handler(void);
 #define FAN_B_GPIO_Port GPIOA
 #define NTC_Pin GPIO_PIN_4
 #define NTC_GPIO_Port GPIOA
+#define RGB_RED_Pin GPIO_PIN_11
+#define RGB_RED_GPIO_Port GPIOE
+#define RGB_GREEN_Pin GPIO_PIN_13
+#define RGB_GREEN_GPIO_Port GPIOE
+#define RGB_BLUE_Pin GPIO_PIN_14
+#define RGB_BLUE_GPIO_Port GPIOE
 #define LCD_RW_Pin GPIO_PIN_10
 #define LCD_RW_GPIO_Port GPIOD
 #define LCD_RS_Pin GPIO_PIN_11

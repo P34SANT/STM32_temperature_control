@@ -40,13 +40,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-typedef enum {
-  Init,
-  Normal,
-  Warning,
-  Error
-}State_t;
-State_t state = Init;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
