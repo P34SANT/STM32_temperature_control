@@ -30,6 +30,7 @@
 #include "../App/Include/heater.h"
 #include "../App/Include/sensor.h"
 #include "../App/Include/lcd.h"
+#include "../App/Include/status.h"
 
 /* USER CODE END Includes */
 
@@ -55,20 +56,22 @@ osThreadId_t lcdTaskHandle;
 osThreadId_t cliTaskHandle;
 osThreadId_t fanTaskHandle;
 osThreadId_t heaterTaskHandle;
+osThreadId_t statusTaskHandle;
+
 const osThreadAttr_t sensorTask_attributes = {
   .name = "temp sensor task",
-  .stack_size = 512 * 4,
+  .stack_size = 600 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 const osThreadAttr_t lcdTask_attributes = {
   .name = "character lcd task",
   .stack_size = 512 * 4,
-  .priority = (osPriority_t) osPriorityRealtime,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 const osThreadAttr_t cliTask_attributes = {
   .name = "uart cli task",
-  .stack_size = 2048 * 4,
-  .priority = (osPriority_t) osPriorityRealtime,
+  .stack_size = 1024 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 const osThreadAttr_t fanTask_attributes = {
   .name = "fan controller task",
@@ -80,6 +83,13 @@ const osThreadAttr_t heaterTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+
+const osThreadAttr_t statusTask_attributes = {
+  .name = "task for system wide status and control",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
 
 
 /* USER CODE END Variables */
@@ -138,7 +148,7 @@ void MX_FREERTOS_Init(void) {
   lcdTaskHandle = osThreadNew(StartLcdTask, NULL, &lcdTask_attributes);
   cliTaskHandle = osThreadNew(StartCliTask, NULL, &cliTask_attributes);
   fanTaskHandle = osThreadNew(StartFanTask, NULL, &fanTask_attributes);
-  
+  statusTaskHandle = osThreadNew(StartStatusTask, NULL, &statusTask_attributes);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
