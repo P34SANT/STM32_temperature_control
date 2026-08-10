@@ -137,20 +137,20 @@ void cli_set_mode (CMD_t cmd) {
     switch (cmd) {
         case CMD_MANUAL:
             //set manual
-            HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : MANUAL\r\n" , sizeof("Log : MANUAL\r\n") , 20);
+            HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : MANUAL\r\n" , strlen("Log : MANUAL\r\n") , 20);
             change_to_manual_mode();
             break;
         case CMD_AUTO:
-            HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : AUTO\r\n" , sizeof("Log : AUTO\r\n") , 20);
+            HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : AUTO\r\n" , strlen("Log : AUTO\r\n") , 20);
             change_to_auto_mode();
             break;
         default:
-            HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : DIDNT SET\r\n" , sizeof("Log : DIDNT SET\r\n") , 20);
+            HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : DIDNT SET\r\n" , strlen("Log : DIDNT SET\r\n") , 20);
             break;
     }
 }
 void cli_set_temp (uint8_t temp) {
-    HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : SET TEMP\r\n" , sizeof("Log : SET TEMP\r\n") , 20);
+    HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : SET TEMP\r\n" , strlen("Log : SET TEMP\r\n") , 20);
     change_target_temp(temporary_target);
 }
 void cli_get_status () {
@@ -169,17 +169,17 @@ void cli_get_status () {
 
 
 
-    HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : STATUS: \r\n" , sizeof("Log : STATUS: \r\n") , 20);
+    HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : STATUS: \r\n" , strlen("Log : STATUS: \r\n") , 20);
     if (st.mode == MANUAL) {
-        HAL_UART_Transmit(&huart1 , (uint8_t *)"MODE = MANUAL \r\n" , sizeof("MODE = MANUAL \r\n") , 20);
+        HAL_UART_Transmit(&huart1 , (uint8_t *)"MODE = MANUAL \r\n" , strlen("MODE = MANUAL \r\n") , 20);
     }else{
-        HAL_UART_Transmit(&huart1 , (uint8_t *)"MODE = AUTO \r\n" , sizeof("MODE = AUTO \r\n") , 20);}
+        HAL_UART_Transmit(&huart1 , (uint8_t *)"MODE = AUTO \r\n" , strlen("MODE = AUTO \r\n") , 20);}
 
-    HAL_UART_Transmit(&huart1 , (uint8_t *)target_temp_str , sizeof(target_temp_str) , 20);
+    HAL_UART_Transmit(&huart1 , (uint8_t *)target_temp_str , strlen(target_temp_str) , 20);
 
-    HAL_UART_Transmit(&huart1 , (uint8_t *)current_temp_str , sizeof(current_temp_str) , 20);
+    HAL_UART_Transmit(&huart1 , (uint8_t *)current_temp_str , strlen(current_temp_str) , 20);
 
-    HAL_UART_Transmit(&huart1 , (uint8_t *)fan_str , sizeof(fan_str) , 20);
+    HAL_UART_Transmit(&huart1 , (uint8_t *)fan_str , strlen(fan_str) , 20);
 
     switch (st.state) {
         case Init:
@@ -198,9 +198,9 @@ void cli_get_status () {
     HAL_UART_Transmit(&huart1 , (uint8_t *)state_str , strlen(state_str) , 20);
 
     if (st.heater_state == heater_off) {
-        HAL_UART_Transmit(&huart1 , (uint8_t *)"HEATER OFF \r\n" , sizeof("HEATER OFF \r\n") , 20);
+        HAL_UART_Transmit(&huart1 , (uint8_t *)"HEATER OFF \r\n" , strlen("HEATER OFF \r\n") , 20);
     }else {
-        HAL_UART_Transmit(&huart1 , (uint8_t *)"HEATER ON \r\n" , sizeof("HEATER ON \r\n") , 20);
+        HAL_UART_Transmit(&huart1 , (uint8_t *)"HEATER ON \r\n" , strlen("HEATER ON \r\n") , 20);
     }
 
 
@@ -208,7 +208,7 @@ void cli_get_status () {
 
 }
 void cli_invalid () {
-    HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : INVALID COMMAND \r\n" , sizeof("Log : INVALID COMMAND \r\n") , 20);
+    HAL_UART_Transmit(&huart1 , (uint8_t *)"Log : INVALID COMMAND \r\n" , strlen("Log : INVALID COMMAND \r\n") , 20);
 
 }
 

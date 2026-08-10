@@ -33,12 +33,17 @@ extern "C" {
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
-
 /* USER CODE END Private defines */
 
 void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+typedef struct {
+  uint8_t BTN_MODE;
+  uint8_t BTN_T_UP;
+  uint8_t BTN_T_DOWN;
+}BTN_FLAG_t;
+extern BTN_FLAG_t BTN_FLAG;
 
 /* USER CODE END Prototypes */
 
