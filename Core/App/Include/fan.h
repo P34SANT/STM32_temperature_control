@@ -9,5 +9,6 @@
 
 void Fan_Init() ;
 void StartFanTask(void *argument);
+uint8_t read_fan_speed() ;
 
 #endif //STM32TEMPCONTROL_FAN_H
