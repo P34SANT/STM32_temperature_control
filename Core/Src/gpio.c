@@ -22,6 +22,8 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN 0 */
+osSemaphoreId_t BTN_DEBOUNCE_SEM;
+volatile uint8_t DebounceActive = 0 ;
 
 BTN_FLAG_t BTN_FLAG = {0} ;
 /* USER CODE END 0 */
@@ -114,15 +116,24 @@ void MX_GPIO_Init(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
+        if (DebounceActive != 1) {
+            if(GPIO_Pin == BTN1_Pin){
+                BTN_FLAG.BTN_MODE = 1;
+                osSemaphoreRelease(BTN_DEBOUNCE_SEM);
 
-        if(GPIO_Pin == BTN1_Pin){
-            BTN_FLAG.BTN_MODE = 1;
-        }
-        if(GPIO_Pin == BTN2_Pin){
-            BTN_FLAG.BTN_T_UP = 1;
-        }
-        if(GPIO_Pin == BTN3_Pin){
-            BTN_FLAG.BTN_T_DOWN = 1;
+            }
+            if(GPIO_Pin == BTN2_Pin){
+                BTN_FLAG.BTN_T_UP = 1;
+                osSemaphoreRelease(BTN_DEBOUNCE_SEM);
+
+
+            }
+            if(GPIO_Pin == BTN3_Pin){
+                BTN_FLAG.BTN_T_DOWN = 1;
+                osSemaphoreRelease(BTN_DEBOUNCE_SEM);
+
+
+            }
         }
     }
 

@@ -29,6 +29,7 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
+#include "cmsis_os2.h"
 
 /* USER CODE END Includes */
 
@@ -43,8 +44,10 @@ typedef struct {
   uint8_t BTN_T_UP;
   uint8_t BTN_T_DOWN;
 }BTN_FLAG_t;
-extern BTN_FLAG_t BTN_FLAG;
 
+extern BTN_FLAG_t BTN_FLAG;
+extern osSemaphoreId_t BTN_DEBOUNCE_SEM;
+extern volatile uint8_t DebounceActive ;
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

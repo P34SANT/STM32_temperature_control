@@ -31,6 +31,8 @@
 #include "../App/Include/sensor.h"
 #include "../App/Include/lcd.h"
 #include "../App/Include/status.h"
+#include "gpio.h"
+
 
 /* USER CODE END Includes */
 
@@ -41,7 +43,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define DEBOUNCE_TIMER_TICK 500
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -57,6 +59,9 @@ osThreadId_t cliTaskHandle;
 osThreadId_t fanTaskHandle;
 osThreadId_t heaterTaskHandle;
 osThreadId_t statusTaskHandle;
+
+osTimerId_t DebounceTimer;;
+
 
 const osThreadAttr_t sensorTask_attributes = {
   .name = "temp sensor task",
@@ -107,7 +112,7 @@ const osThreadAttr_t defaultTask_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-
+void TimerCallback(void *argument);
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -130,9 +135,11 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
+  BTN_DEBOUNCE_SEM = osSemaphoreNew(1, 0, NULL);
   /* USER CODE END RTOS_SEMAPHORES */
 
   /* USER CODE BEGIN RTOS_TIMERS */
+   DebounceTimer = osTimerNew(TimerCallback, osTimerOnce, NULL, NULL);
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
 
@@ -174,13 +181,23 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+
+    osSemaphoreAcquire(BTN_DEBOUNCE_SEM, osWaitForever);
+    DebounceActive = 1 ;
+    osTimerStart(DebounceTimer , DEBOUNCE_TIMER_TICK);
+    check_buttons();
   }
   /* USER CODE END StartDefaultTask */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+
+void TimerCallback(void *argument)
+{
+  DebounceActive = 0;
+
+}
 
 /* USER CODE END Application */
 

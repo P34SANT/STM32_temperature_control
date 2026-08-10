@@ -3,6 +3,9 @@
 //
 
 #include "../App/Include/status.h"
+
+#include <string.h>
+
 #include "cmsis_os.h"
 #include "gpio.h"
 #include "iwdg.h"
@@ -52,7 +55,7 @@ Status_t get_system_status() {
 
 void check_buttons(){
     if (BTN_FLAG.BTN_MODE == 1) {
-        BTN_FLAG.BTN_MODE = 0;
+            memset(&BTN_FLAG, 0, sizeof(BTN_FLAG));
             if (system_status.mode == MANUAL) {
                 change_to_auto_mode();
 
@@ -62,13 +65,13 @@ void check_buttons(){
     }
     if (BTN_FLAG.BTN_T_UP == 1) {
 
-            BTN_FLAG.BTN_T_UP = 0;
+            memset(&BTN_FLAG, 0, sizeof(BTN_FLAG));
             system_status.target_temp ++;
 
     }
     if (BTN_FLAG.BTN_T_DOWN == 1) {
 
-            BTN_FLAG.BTN_T_DOWN = 0;
+            memset(&BTN_FLAG, 0, sizeof(BTN_FLAG));
             system_status.target_temp --;
 
     }
@@ -81,7 +84,6 @@ void StartStatusTask(void *argument)
     /* Infinite loop */
     for(;;)
     {
-        check_buttons();
         if(system_status.current_temp != system_status.target_temp) {
             system_status.state = Warning;
         }else {

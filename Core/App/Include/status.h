@@ -46,6 +46,8 @@ void change_to_manual_mode() ;
 
 void change_to_auto_mode() ;
 
+void check_buttons();
+
 Status_t get_system_status() ;
 
 uint8_t read_target_temp() ;
