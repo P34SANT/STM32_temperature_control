@@ -60,34 +60,38 @@ osThreadId_t statusTaskHandle;
 
 const osThreadAttr_t sensorTask_attributes = {
   .name = "temp sensor task",
-  .stack_size = 600 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 2048,
+  .priority = osPriorityNormal,
 };
+
 const osThreadAttr_t lcdTask_attributes = {
   .name = "character lcd task",
-  .stack_size = 512 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 2048,
+  .priority = osPriorityNormal,
 };
+
 const osThreadAttr_t cliTask_attributes = {
   .name = "uart cli task",
-  .stack_size = 1024 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 4096,
+  .priority = osPriorityNormal,
 };
+
 const osThreadAttr_t fanTask_attributes = {
   .name = "fan controller task",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 1024,
+  .priority = osPriorityNormal,
 };
+
 const osThreadAttr_t heaterTask_attributes = {
   .name = "heater controller task",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 1024,
+  .priority = osPriorityNormal,
 };
 
 const osThreadAttr_t statusTask_attributes = {
   .name = "task for system wide status and control",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 2048,
+  .priority = osPriorityNormal,
 };
 
 
