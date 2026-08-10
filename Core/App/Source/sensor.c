@@ -34,11 +34,6 @@
 
     }
 
-    void Sensor_update() {
-
-
-
-    }
 
     double calculate_temp_value(uint32_t raw_value) {
         return (raw_value * VREF) / (SENSITIVITY * SENSOR_MAX_VALUE);

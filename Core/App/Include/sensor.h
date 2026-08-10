@@ -8,8 +8,6 @@
 
 void Sensor_Init();
 
-void Sensor_update() ;
-
 extern volatile double temp_sensor_value ;
 
 void StartSensorTask(void *argument);
