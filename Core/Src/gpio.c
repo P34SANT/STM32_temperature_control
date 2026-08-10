@@ -23,6 +23,7 @@
 
 /* USER CODE BEGIN 0 */
 
+BTN_FLAG_t BTN_FLAG = {0} ;
 /* USER CODE END 0 */
 
 /*----------------------------------------------------------------------------*/
@@ -100,8 +101,31 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
 }
 
 /* USER CODE BEGIN 2 */
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+
+
+        if(GPIO_Pin == BTN1_Pin){
+            BTN_FLAG.BTN_MODE = 1;
+        }
+        if(GPIO_Pin == BTN2_Pin){
+            BTN_FLAG.BTN_T_UP = 1;
+        }
+        if(GPIO_Pin == BTN3_Pin){
+            BTN_FLAG.BTN_T_DOWN = 1;
+        }
+    }
+
+
 
 /* USER CODE END 2 */
